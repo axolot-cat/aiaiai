@@ -2,4 +2,4 @@
 
 All things AI.
 
-- (installation.adoc)[Installation Instructions]
+- [Installation instructions](installation.adoc) 
