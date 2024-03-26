@@ -1,0 +1,60 @@
+= AI installation
+:toc:
+
+== Environment
+=== Arch Linux
+. install https://aur.archlinux.org/packages/miniconda3[miniconda] from AUR:
+[source,shell]
+git clone https://aur.archlinux.org/miniconda3.git
+cd miniconda3
+makepkg -si
+
+. create and edit `~/.condarc` to avoid conda automatically activating the base environment when opening any new shell:
+[source,shell]
+cd
+echo "auto_activate_base: false" > .condarc
+
+. you may need to update the `PATH` or to create an alias to run `conda` as a command. It installs it in `/opt/microdonda3/bin/`.
+. create a conda environment
+[source,shell]
+conda create -n <NAME_OF_YOUR_ENVIRONMENT>
+
+. activate the environment:
+[source,shell]
+conda activate <NAME_OF_YOUR_ENVIRONMENT>
+
+== Stable Diffusion
+=== Engine Installation
+To install Stable Diffusion, first make sure you are in the right conda environment with:
+[source,shell]
+conda activate <NAME_OF_YOUR_ENVIRONMENT>
+
+Instructions from their https://github.com/Stability-AI/generative-models#installation[repo].
+[source,shell]
+git clone https://github.com/Stability-AI/generative-models.git
+cd generative-models
+# install required packages from pypi
+python3 -m venv .pt2
+source .pt2/bin/activate
+pip3 install -r requirements/pt2.txt
+pip3 install .
+pip3 install -e git+https://github.com/Stability-AI/datapipelines.git@main#egg=sdata
+
+=== UI Installation
+Then install https://github.com/AUTOMATIC1111/stable-diffusion-webui/tree/master[Stable Diffusion Web UI]:
+
+. Navigate to the directory where you want the UI to be installed. I put it in a subdirectory inside Stable Diffusion's install directory:
+[source,shell]
+cd your/webui/parent/dir
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+
+. Edit the preferences in `/webui-user.sh` if you need to -- I didn't.
+. Run the installation script
+[source,shell]
+cd stable-diffusion-webui
+./webui.sh
+
+=== Running
+Navigate to the web-ui directory and run:
+[source,shell]
+python -m env env
